@@ -1,9 +1,9 @@
-CREATE TABLE DeviceDailyCNC (
+CREATE TABLE __DeviceDaily__ (
     Id int IDENTITY (1,1) NOT NULL
-    ,Device int NOT NULL FOREIGN KEY REFERENCES Device(Id)
+    ,Device int NOT NULL FOREIGN KEY REFERENCES __Device__(Id)
     ,Day date NOT NULL
     ,AlertsWarning int NOT NULL
     ,AlertsStd int NOT NULL
     ,AlertsCrit int NOT NULL
-    ,CONSTRAINT PK_DeviceAlert_Id PRIMARY KEY CLUSTERED (Id)
+    ,CONSTRAINT PK___DeviceDaily___Id PRIMARY KEY CLUSTERED (Id)
 );

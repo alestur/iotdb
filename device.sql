@@ -1,10 +1,10 @@
-CREATE TABLE Device (
+CREATE TABLE __Device__ (
     Id int IDENTITY (1,1) NOT NULL
     ,DeviceId varchar(100) NOT NULL
-    ,Factory int NOT NULL FOREIGN KEY REFERENCES Factory(Id)
-    ,DeviceClass int FOREIGN KEY REFERENCES DeviceClass(Id)
+    ,Factory int NOT NULL FOREIGN KEY REFERENCES __Factory__(Id)
+    ,DeviceClass int FOREIGN KEY REFERENCES __EnumDeviceClass__(Id)
     ,MachineName varchar(100)
     ,IsActive bit NOT NULL DEFAULT 1
-    ,CONSTRAINT PK_Device_Id PRIMARY KEY NONCLUSTERED (Id)
-    ,CONSTRAINT UQ_DeviceClass_DeviceId UNIQUE CLUSTERED (DeviceId)
+    ,CONSTRAINT PK___Device___Id PRIMARY KEY NONCLUSTERED (Id)
+    ,CONSTRAINT UQ___DeviceClass___DeviceId UNIQUE CLUSTERED (DeviceId)
 );

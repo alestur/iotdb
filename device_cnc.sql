@@ -1,5 +1,5 @@
-CREATE TABLE DeviceCNC (
-    Device int FOREIGN KEY REFERENCES Device(Id)
+CREATE TABLE __DeviceCNC__ (
+    Device int FOREIGN KEY REFERENCES __Device__(Id)
     ,ShiftHours int
     ,ShiftStartTime time
     ,OilChangeInterval int
@@ -8,5 +8,5 @@ CREATE TABLE DeviceCNC (
     ,SpindleChangeInterval int
     ,SpindleHoursResetTime float
     ,SpindleHours float
-    ,CONSTRAINT PK_DeviceCNC_Id PRIMARY KEY CLUSTERED (Id)
+    ,CONSTRAINT PK___DeviceCNC___Id PRIMARY KEY CLUSTERED (Device)
 );

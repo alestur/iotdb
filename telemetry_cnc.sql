@@ -1,21 +1,21 @@
-CREATE TABLE TelemetryCNC (
+CREATE TABLE __TelemetryCNC__ (
     Id int IDENTITY (1,1) NOT NULL
     ,DeviceId varchar(100)
+    ,FactoryId varchar(100)
     ,Tst datetime NOT NULL
     ,DeviceTime datetime
-    ,MachineTime datetime
-    ,RunTime float
     ,DeviceStatus varchar(20)
-    ,State varchar(20)
+    ,MachineTime datetime
+    ,MachineState varchar(20)
+    ,RunTime float
+    ,ShiftTime float
     ,SpindleLoad float
     ,XAxisLoad float
     ,YAxisLoad float
     ,ZAxisLoad float
-    ,SpindlePtc float
-    ,FeedPct float
-    ,TraversePtc float
-    ,AutoRunTime float
-    ,IdleRunTime float
-    ,CONSTRAINT PK_TelemetryCNC_Id PRIMARY KEY NONCLUSTERED (Id)
-    ,CONSTRAINT UQ_TelemetryCNC_Tst UNIQUE CLUSTERED (DeviceId, Tst)
+    ,SpindlePtc float   -- TODO
+    ,FeedPct float      -- TODO
+    ,TraversePtc float  -- TODO
+    ,CONSTRAINT PK___TelemetryCNC___Id PRIMARY KEY NONCLUSTERED (Id)
+    ,CONSTRAINT UQ___TelemetryCNC___Tst UNIQUE CLUSTERED (DeviceId, Tst)
 );

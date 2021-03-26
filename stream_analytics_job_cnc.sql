@@ -1,4 +1,5 @@
-SELECT [DeviceId] AS [DeviceId]
+SELECT [DeviceID] AS [DeviceId]
+    ,[FactoryID] AS [FactoryId]
     ,System.TimeStamp AS [Tst]
     ,CAST(CONCAT(
         SUBSTRING([DeviceTime], 1, 4), '-'
@@ -8,6 +9,7 @@ SELECT [DeviceId] AS [DeviceId]
         ,SUBSTRING([DeviceTime], 11, 2), ':'
         ,SUBSTRING([DeviceTime], 13, 6)
     ) as datetime) AS [DeviceTime]
+    ,[DeviceStatus] AS [DeviceStatus]
     ,CAST(CONCAT(
         SUBSTRING([MachineTime], 1, 4), '-'
         ,SUBSTRING([MachineTime], 5, 2), '-'
@@ -16,11 +18,11 @@ SELECT [DeviceId] AS [DeviceId]
         ,SUBSTRING([MachineTime], 11, 2), ':'
         ,SUBSTRING([MachineTime], 13, 6)
     ) as datetime) AS [MachineTime]
+    ,[MachineState] AS [MachineState]
     ,CAST(SUBSTRING([RunTime], 1, LEN([RunTime]) - 4) as float) * 3600
         + CAST(SUBSTRING([RunTime], LEN([RunTime]) - 3, 2) as float) * 60
         + CAST(SUBSTRING([RunTime], LEN([RunTime]) - 1, 2) as float) AS [RunTime]
-    ,CONCAT([RunStatusAuto], [RunStatusStart], [RunStatusMDI]) AS [DeviceStatus]
-    ,'' AS [State]
+    ,DATEDIFF(second, [__DeviceCNC__].[ShiftStartTime], CAST(System.TimeStamp AS TIME)) AS [ShiftTime]
     ,CAST([SpindleLoad] as float) AS [SpindleLoad]
     ,CAST([XAxisLoad] as float) AS [XAxisLoad]
     ,CAST([YAxisLoad] as float) AS [YAxisLoad]
@@ -28,13 +30,9 @@ SELECT [DeviceId] AS [DeviceId]
     ,CAST([SpindlePtc] as float) AS [SpindlePtc]
     ,CAST([FeedPct] as float) AS [FeedPct]
     ,CAST([TraversePtc] as float) AS [TraversePtc]
-    ,CAST(SUBSTRING([AutoRunTime], 1, LEN([AutoRunTime]) - 4) as float) * 3600
-        + CAST(SUBSTRING([AutoRunTime], LEN([AutoRunTime]) - 3, 2) as float) * 60
-        + CAST(SUBSTRING([AutoRunTime], LEN([AutoRunTime]) - 1, 2) as float) AS [AutoRunTime]
-    ,CAST(SUBSTRING([IdleRunTime], 1, LEN([IdleRunTime]) - 4) as float) * 3600
-        + CAST(SUBSTRING([IdleRunTime], LEN([IdleRunTime]) - 3, 2) as float) * 60
-        + CAST(SUBSTRING([IdleRunTime], LEN([IdleRunTime]) - 1, 2) as float) AS [IdleRunTime]
 INTO
-    [DevTelemetryCNC0]
+    [__TelemetryCNC__]
+    LEFT JOIN [__Device__] ON [__Device__].[DeviceId] = [DeviceId]
+    LEFT JOIN [__DeviceCNC__] ON [__DeviceCNC__].[Device] = [__Device__].[Id]
 FROM
-    [DevIoTHub0]
+    [__IoTHub__]
