@@ -13,9 +13,9 @@ CREATE TABLE __TelemetryCNC__ (
     ,XAxisLoad float
     ,YAxisLoad float
     ,ZAxisLoad float
-    ,SpindlePtc float   -- TODO
-    ,FeedPct float      -- TODO
-    ,TraversePtc float  -- TODO
+    ,SpindlePtc float
+    ,FeedPtc float
+    ,TraversePtc float
     ,CONSTRAINT PK___TelemetryCNC___Id PRIMARY KEY NONCLUSTERED (Id)
     ,CONSTRAINT UQ___TelemetryCNC___Tst UNIQUE CLUSTERED (DeviceId, Tst)
 );

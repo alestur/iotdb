@@ -4,6 +4,7 @@ CREATE TABLE __DeviceAlert__ (
     ,Tst datetime NOT NULL
     ,DeviceTime datetime
     ,DeviceStatus varchar(20)
+    ,AlertType varchar(20)
     ,AlertCode varchar(20)
     ,AlertMsg varchar(8000)
     ,AlertLevel varchar(20)
