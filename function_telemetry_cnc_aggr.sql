@@ -60,16 +60,18 @@ FROM
     {pref:s}TelemetryCNC{ver:03d} T
     LEFT JOIN (
         SELECT
-            MAX(Tst) Tst
-            ,DeviceId
+            MIN(A.Tst) Tst
+            ,A.DeviceId
         FROM
-            {pref:s}TelemetryCNCAggr{ver:03d}
+            {pref:s}TelemetryCNC{ver:03d} A
+        WHERE
+            A.Tst > (SELECT MAX(B.Tst) FROM {pref:s}TelemetryCNCAggr{ver:03d} B WHERE A.DeviceId = B.DeviceId)
         GROUP BY
-            DeviceId
+            A.DeviceId
     ) XMaxTst ON XMaxTst.DeviceId = T.DeviceId
     ,{pref:s}Settings{ver:03d} S
 WHERE
-    S.Param = 'aggregation_interval'
+    S.Param = 'TelemetryAggregationMidSeconds'
     AND (
         DATEDIFF(SECOND, XMaxTst.Tst, GETDATE()) > CAST(S.Value AS INT)
         AND T.Tst > XMaxTst.Tst
