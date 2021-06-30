@@ -8,5 +8,6 @@ CREATE TABLE __DeviceAlert__ (
     ,AlertCode varchar(20)
     ,AlertMsg varchar(8000)
     ,AlertLevel varchar(20)
+    ,IsSynchronized bit NOT NULL DEFAULT 0
     ,CONSTRAINT PK___DeviceAlert___Id PRIMARY KEY CLUSTERED (Id)
 );
